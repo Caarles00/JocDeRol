@@ -1,14 +1,17 @@
 
 package joc;
 
+import java.util.ArrayList;
+
 
 public abstract class Player {
     
-    //Atributs privats
+    //Atributs 
     private String name;
     private int attackP;
     private int defenseP;
     private int life;
+    private ArrayList teams = new ArrayList();
     
     //Constructor
     public Player(String name, int attackP, int defenseP, int life) {
@@ -16,11 +19,6 @@ public abstract class Player {
         this.attackP = attackP;
         this.defenseP = defenseP;
         this.life = life;
-    }
-    
-    //Mètode attack() 
-    public void attack(Player p){
-        
     }
     
     //Getters
@@ -40,9 +38,27 @@ public abstract class Player {
         return life;
     }
     
-    //Mètode hit()
+    //Mètodes 
+    public void attack(Player p){
+        System.out.println("");
+    }
+    
     protected void hit(int attackPoints){
         
+    }
+    
+    public void add(Team t){
+        teams.add(t);
+    }
+    
+    public void remove(Team t){
+        teams.remove(t);
+    }
+    
+    public void llistar(){
+        for (int i = 0; i < teams.size(); i++) {
+            System.out.println(i);
+        }
     }
 
     @Override
