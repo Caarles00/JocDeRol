@@ -2,7 +2,7 @@
 package joc;
 
 
-public class Warrior extends Player {
+public class Warrior extends Human {
     
     //Constructor
     public Warrior(String name, int attackP, int defenseP, int life) {

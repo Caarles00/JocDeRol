@@ -91,5 +91,11 @@ public class Leer {
     // Retornarà true si s'introdueix "true" o "TRUE" i false en qualsevol altre cas
     return n;
   }
+
+    public static class leerTexto {
+
+        public leerTexto() {
+        }
+    }
 }
 

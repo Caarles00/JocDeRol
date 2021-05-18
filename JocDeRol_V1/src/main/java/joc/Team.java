@@ -31,6 +31,9 @@ public class Team{
         }
     }
     
+    public boolean equals(Team t){
+        return true;
+    }
     
 
     @Override
