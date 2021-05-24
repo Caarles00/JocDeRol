@@ -38,7 +38,7 @@ public class Team{
 
     @Override
     public String toString() {
-        return "";
+        return "Equip: " + this.teamName;
     }
     
     

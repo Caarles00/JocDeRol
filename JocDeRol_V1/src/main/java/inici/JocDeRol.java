@@ -12,6 +12,9 @@ public class JocDeRol {
     
     Scanner teclat = new Scanner(System.in);
     
+    public static void main(String[] args) {
+        
+    }
     public static void provaFase(){
         System.out.println("Human:");
         Human h = new Human("Carles", 20, 50, 200);

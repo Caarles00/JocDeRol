@@ -47,17 +47,15 @@ public abstract class Player {
     }
     
     protected void hit(int attackPoints, Player p){
-        int sense_Escut1;//Punts d'atac - la defensa, es la diferencia entre els punts d'atac i els de defensa
-        int sense_Escut2;//Punts d'atac - la defensa
-        int vida_Restant1;//Punts de vida - senseEscut1
-        int vida_Restant2;//Punts de vida - senseEscut2
-        int escut_restant1;
-        int escut_restant2;
+        int vida_Restant1 = 0;//Punts de vida - senseEscut1
+        int vida_Restant2 = 0;//Punts de vida - senseEscut2
+        int escut_restant1 = 0;//Punts d'atac - la defensa, en cas de que l'escut no siga < 0
+        int escut_restant2 = 0;
         
+        //Player 1
         if (p.life > 0) {
             if (this.attackP >= p.defenseP) {
-                sense_Escut1 = this.getAttackP() - p.defenseP;
-                vida_Restant1 = p.getLife() - sense_Escut1;
+                vida_Restant1 = this.getAttackP() - p.defenseP;
             }else{//En aquest cas el jugador seguira tinguent escut
                 escut_restant1 = p.defenseP - this.getAttackP();
                 p.defenseP = escut_restant1;
@@ -66,9 +64,39 @@ public abstract class Player {
             if (p.life <= 0) {
                 vida_Restant1 = 0;
                 System.out.println(p.name + "es colpejat amb " + this.attackP + " punts i es defen amb " + p.defenseP + ". Vides: " + vida_Restant1);
-                System.out.println(p.name + "Ha mort!!");
+                System.out.println(p.name + "ha mort!!");
+            }else{
+                System.out.println(p.name + "es colpejat amb " + this.attackP + " punts i es defen amb " + p.defenseP + ". Vides: " + vida_Restant1);
+                p.life = vida_Restant1;
             }
         }
+        
+        //Player 2
+        if (p.life > 0) {
+            if (this.life > 0) {
+                if (p.attackP >= this.defenseP) {
+                    vida_Restant2 = p.attackP - this.getDefenseP();
+                    this.life = this.life - vida_Restant2;
+                }else{
+                    escut_restant2 = this.getDefenseP() - p.attackP;
+                    this.defenseP = escut_restant2;
+                }
+            }
+            if (this.life <= 0) {
+                this.life = 0;
+                System.out.println(name + " es colpejat amb " + p.attackP + " i es defen amb " + this.defenseP + ". Vides: " + life + "-" + vida_Restant2 + " = " + this.life);
+                System.out.println(this.name + "ha mort!!");
+            }else{
+                vida_Restant2 = 0;//No lleva res perque l'escut es major als punts del atac
+                System.out.println(name + " es colpejat amb " + p.attackP + " i es defen amb " + this.defenseP + ". Vides: " + life + "-" + vida_Restant2 + " = " + this.life);
+            }
+        }
+        
+        System.out.println("");
+        System.out.println("DESPRES DE L'ATAC");
+        System.out.println(toString());
+        System.out.println(p.toString());
+        System.out.println("");
     }
     
     public void add(Team t){
