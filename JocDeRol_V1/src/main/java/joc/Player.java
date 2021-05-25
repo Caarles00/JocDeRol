@@ -12,6 +12,7 @@ public abstract class Player {
     private int defenseP;
     private int life;
     private ArrayList teams = new ArrayList();
+    private ArrayList items = new ArrayList();
     
     //Constructor
     public Player(String name, int attackP, int defenseP, int life) {
@@ -50,12 +51,13 @@ public abstract class Player {
         int vida_Restant1 = 0;//Punts de vida - senseEscut1
         int vida_Restant2 = 0;//Punts de vida - senseEscut2
         int escut_restant1 = 0;//Punts d'atac - la defensa, en cas de que l'escut no siga < 0
-        int escut_restant2 = 0;
+        int escut_restant2 = 0;//Punts d'atac - la defensa, en cas de que l'escut no siga < 0
         
         //Player 1
         if (p.life > 0) {
             if (this.attackP >= p.defenseP) {
                 vida_Restant1 = this.getAttackP() - p.defenseP;
+                p.life = p.life - vida_Restant1;
             }else{//En aquest cas el jugador seguira tinguent escut
                 escut_restant1 = p.defenseP - this.getAttackP();
                 p.defenseP = escut_restant1;
@@ -99,6 +101,7 @@ public abstract class Player {
         System.out.println("");
     }
     
+    //Team
     public void add(Team t){
         teams.add(t);
     }
@@ -116,10 +119,24 @@ public abstract class Player {
     public boolean equals(Player p){
         return true;
     }
+    
+    //Item
+    public void add(Item i){
+        items.add(i);//Afegim l'item
+        attackP = attackP + i.attcakBonus;//Sumem els punts d'atac que ens dona l'item
+        defenseP = defenseP + i.defenseBonus;//Sumem els punts de defensa que ens dona l'item
+    }
+    
+    public void remove(Item i){
+        items.remove(i);//Borrem l'item
+        attackP = attackP - i.attcakBonus;//Restem els punts d'atac que estaven afegits
+        defenseP = attackP - i.defenseBonus;//Restem els punts de defensa que estaven afegits
+        
+    }
 
     @Override
     public String toString() {
-        return getName() + "PA:" + this.attackP + " / PD:" + this.defenseP + " / PV:" + this.life;
+        return getName() + "PA:" + this.attackP + " / PD:" + this.defenseP + " / PV:" + this.life + " i te de items " + this.items;
     }
     
     
