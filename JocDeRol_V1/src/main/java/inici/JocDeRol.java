@@ -2,9 +2,13 @@
 package inici;
 
 import io.Leer;
+import java.util.ArrayList;
 import java.util.Scanner;
 import joc.Alien;
 import joc.Human;
+import joc.Item;
+import joc.Player;
+import joc.Team;
 import joc.Warrior;
 
 
@@ -12,10 +16,18 @@ import joc.Warrior;
 public class JocDeRol {
     
     public static void main(String[] args) {
-        Scanner teclat = new Scanner(System.in);
-        int op1, op2;
-        boolean seguir = true;
         
+        //Arrays per a guardar els jugadors, grups i per a les armes
+        ArrayList<Player> players = new ArrayList();
+        ArrayList<Team> teams = new ArrayList();
+        ArrayList<Item> items = new ArrayList();
+        
+        Scanner teclat = new Scanner(System.in);
+        int op1, op2, op3, op4, op5, opTipusJug;
+        boolean seguir = true;
+        String nom;
+        
+        //Menú joc de rol
         System.out.println("=====================");
         System.out.println("      JOC DE ROL     ");
         System.out.println("=====================");
@@ -41,13 +53,48 @@ public class JocDeRol {
                             System.out.println("================================");
                             System.out.println("        J U G A D O R S         ");
                             System.out.println("================================");
-                            System.out.println("1.1.1 Creaj jugador             ");
+                            System.out.println("1.1.1 Crear jugador             ");
                             System.out.println("1.1.2 Mostrar jugadors          ");
                             System.out.println("1.1.3 Esborrar jugadors         ");
                             System.out.println("1.1.4 Assignar jugar a equip    ");
                             System.out.println("1.1.5 Assignar objecte a jugador");
                             System.out.println("1.1.6 Eixir                     ");
                             System.out.println("================================");
+                            op3 = Leer.leerEntero("Tria una opció: ");
+                            switch(op3){
+                                case 1:
+                                    System.out.println("============");
+                                    System.out.println("1. Alien    ");
+                                    System.out.println("2. Warrior  ");
+                                    System.out.println("3. Human    ");
+                                    System.out.println("============");
+                                    opTipusJug = Leer.leerEntero("Quin tipus de jugador vols triar?");
+                                    switch(opTipusJug){
+                                        case 1:
+                                            System.out.println("Has triat ser 👽");
+                                            nom = Leer.leerTexto("Digues el nom del Alien");
+                                            break;
+                                        case 2:
+                                            break;
+                                        case 3:
+                                            break;
+                                        default:
+                                            System.out.println("Opció incorrecta");
+                                    }
+                                    break;
+                                case 2:
+                                    break;
+                                case 3:
+                                    break;
+                                case 4:
+                                    break;
+                                case 5:
+                                    break;
+                                case 6:
+                                    break;
+                                default:
+                                    System.out.println("Opció incorrecta");
+                            }
                             break;
                         case 2:
                             System.out.println("==============================");
@@ -59,6 +106,21 @@ public class JocDeRol {
                             System.out.println("1.2.4 Assignar equip a jugador");
                             System.out.println("1.2.5 Eixir                   ");
                             System.out.println("==============================");
+                            op4 = Leer.leerEntero("Tria una opció: ");
+                            switch(op4){
+                                case 1:
+                                    break;
+                                case 2:
+                                    break;
+                                case 3:
+                                    break;
+                                case 4:
+                                    break;
+                                case 5:
+                                    break;
+                                default:
+                                    System.out.println("Opció incorrecta");
+                            }
                             break;
                         case 3:
                             System.out.println("=================================");
@@ -70,6 +132,21 @@ public class JocDeRol {
                             System.out.println("1.3.4 Assignar objecete a jugador");
                             System.out.println("1.3.5 Eixir                      ");
                             System.out.println("=================================");
+                            op5 = Leer.leerEntero("Tria una opció: ");
+                            switch(op5){
+                                case 1:
+                                    break;
+                                case 2:
+                                    break;
+                                case 3:
+                                    break;
+                                case 4:
+                                    break;
+                                case 5:
+                                    break;
+                                default:
+                                    System.out.println("Opció incorrecta");
+                            }
                             break;
                         default:
                             System.out.println("Opcio incorrecta");
