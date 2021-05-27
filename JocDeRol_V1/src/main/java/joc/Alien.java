@@ -2,6 +2,7 @@
 package joc;
 
 
+
 public class Alien extends Player {
     
     //Constructor
@@ -10,7 +11,10 @@ public class Alien extends Player {
     }
     
     @Override
-    public void attack(Player p){
-        
+    public int getAttackP(){
+        if (this.getLife() < 20) {
+            this.attackP= this.attackP + 3;
+        }
+        return this.attackP;
     }
 }

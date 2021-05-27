@@ -48,8 +48,8 @@ public abstract class Player {
     }
     
     protected void hit(int attackPoints, Player p){
-        int vida_Restant1 = 0;//Punts de vida - senseEscut1
-        int vida_Restant2 = 0;//Punts de vida - senseEscut2
+        int vida_Restant1 = 0;//Punts de vida - els punts de defensa, en cas  de que els punts d'atac sigua major als de defensa
+        int vida_Restant2 = 0;//Punts de vida - els punts de defensa, en cas  de que els punts d'atac sigua major als de defensa
         int escut_restant1 = 0;//Punts d'atac - la defensa, en cas de que l'escut no siga < 0
         int escut_restant2 = 0;//Punts d'atac - la defensa, en cas de que l'escut no siga < 0
         

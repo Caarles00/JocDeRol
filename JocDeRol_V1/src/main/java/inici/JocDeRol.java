@@ -23,9 +23,9 @@ public class JocDeRol {
         ArrayList<Item> items = new ArrayList();
         
         Scanner teclat = new Scanner(System.in);
-        int op1, op2, op3, op4, op5, opTipusJug;
+        int op1, op2, op3, op4, op5, opTipusJug, puntsAtac, puntsDef, puntsVida;
         boolean seguir = true;
-        String nom;
+        String nom, deletePlayer, addP_to_T, addP_to_T_2;
         
         //Menú joc de rol
         System.out.println("=====================");
@@ -68,30 +68,150 @@ public class JocDeRol {
                                     System.out.println("2. Warrior  ");
                                     System.out.println("3. Human    ");
                                     System.out.println("============");
-                                    opTipusJug = Leer.leerEntero("Quin tipus de jugador vols triar?");
+                                    opTipusJug = Leer.leerEntero("Quin tipus de jugador vols ser?");
                                     switch(opTipusJug){
+                                        //Alien
                                         case 1:
-                                            System.out.println("Has triat ser 👽");
-                                            nom = Leer.leerTexto("Digues el nom del Alien");
+                                            System.out.println("Has triat ser Alien!");
+                                            nom = Leer.leerTexto("Nom: ");
+                                            
+                                            puntsAtac = Leer.leerEntero("Punts d'atac, entre 1 i 100: ");
+                                            while(puntsAtac < 1 || puntsAtac > 100){
+                                                puntsAtac = Leer.leerEntero("Error, torna a introduir els punts d'atac: ");
+                                            }
+                                            
+                                            puntsDef = Leer.leerEntero("Punts de defensa, ha de ser menor 100: ");
+                                            while(puntsDef < 0 || puntsDef > 100){
+                                                puntsDef = Leer.leerEntero("Error, torna a introduir els punts de defensa: ");
+                                            }
+                                            
+                                            puntsVida = Leer.leerEntero("Punts de vida, entre 50 i 150: ");
+                                            while(puntsVida < 50 || puntsVida > 150){
+                                                puntsVida = Leer.leerEntero("Error, torna a introduir els punts de vida: ");
+                                            }
+                                            
+                                            //Alien creat
+                                            Alien alien = new Alien(nom, puntsAtac, puntsDef, puntsVida);
                                             break;
+                                            
+                                        //Warrior
                                         case 2:
+                                            System.out.println("Has triat ser Warrior!");
+                                            nom = Leer.leerTexto("Nom: ");
+                                            
+                                            puntsAtac = Leer.leerEntero("Punts d'atac, entre 1 i 100: ");
+                                            while(puntsAtac < 1 || puntsAtac > 100){
+                                                puntsAtac = Leer.leerEntero("Error, torna a introduir els punts d'atac: ");
+                                            }
+                                            
+                                            puntsDef = Leer.leerEntero("Punts de defensa, ha de ser menor 100: ");
+                                            while(puntsDef < 0 || puntsDef > 100){
+                                                puntsDef = Leer.leerEntero("Error, torna a introduir els punts de defensa: ");
+                                            }
+                                            
+                                            puntsVida = Leer.leerEntero("Punts de vida, entre 50 i 150: ");
+                                            while(puntsVida < 50 || puntsVida > 150){
+                                                puntsVida = Leer.leerEntero("Error, torna a introduir els punts de vida: ");
+                                            }
+                                            //Warrior creat
+                                            Warrior warrior = new Warrior(nom, puntsAtac, puntsDef, puntsVida);
                                             break;
+                                            
+                                        //Human
                                         case 3:
+                                            System.out.println("Has triat ser Humà!");
+                                            nom = Leer.leerTexto("Nom: ");
+                                            
+                                            puntsAtac = Leer.leerEntero("Punts d'atac, entre 1 i 100: ");
+                                            while(puntsAtac < 1 || puntsAtac > 100){
+                                                puntsAtac = Leer.leerEntero("Error, torna a introduir els punts d'atac: ");
+                                            }
+                                            
+                                            puntsDef = Leer.leerEntero("Punts de defensa, ha de ser menor 100: ");
+                                            while(puntsDef < 0 || puntsDef > 100){
+                                                puntsDef = Leer.leerEntero("Error, torna a introduir els punts de defensa: ");
+                                            }
+                                            System.out.println("Un humà no pot tindre mes de 100 punts de vida");
+                                            puntsVida = Leer.leerEntero("Punts de vida, entre 50 i 100: ");
+                                            while(puntsVida < 50 || puntsVida > 150){
+                                                puntsVida = Leer.leerEntero("Error, torna a introduir els punts de vida: ");
+                                            }
+                                            //Humà creat
+                                            Human huma = new Human(nom, puntsAtac, puntsDef, puntsVida);
                                             break;
                                         default:
                                             System.out.println("Opció incorrecta");
                                     }
                                     break;
+                                    
                                 case 2:
+                                    System.out.println("Has triat mostrar jugadors");
+                                    //Recorreguem el array de players per a trure la informació amb el toString()
+                                    for (int i = 0; i < players.size(); i++) {
+                                        System.out.println(players.get(i).toString());
+                                    }
                                     break;
+                                    
                                 case 3:
+                                    //En cas de que l'array de players no estiga buit
+                                    if (!players.isEmpty()) {
+                                        System.out.println("====================");
+                                        System.out.println(" LLISTA DE JUGADORS ");
+                                        System.out.println("====================");
+                                        for (int i = 0; i < players.size(); i++) {
+                                            System.out.println(players.get(i).toString());
+                                        }
+                                        System.out.println("====================");
+                                        deletePlayer = Leer.leerTexto("Quin jugador vols borrar? ");
+                                        for (int i = 0; i < players.size(); i++) {
+                                            if (players.get(i).equals(deletePlayer)) {
+                                                players.remove(i);
+                                            }
+                                        }
+                                    }else{
+                                        System.out.println("Ni hi ha cap jugador");
+                                    }
                                     break;
+                                    
                                 case 4:
+                                    if (!players.isEmpty()&& !teams.isEmpty()) {
+                                        //Llistem els jugadors
+                                        System.out.println("====================");
+                                        System.out.println(" LLISTA DE JUGADORS ");
+                                        System.out.println("====================");
+                                        for (int i = 0; i < players.size(); i++) {
+                                            System.out.println(players.get(i).toString());
+                                        }
+                                        System.out.println("====================");
+                                        addP_to_T = Leer.leerTexto("Quin jugador vols assignar un equip? ");
+                                        
+                                        System.out.println("");
+                                        
+                                        //Llistem els equips
+                                        System.out.println("====================");
+                                        System.out.println("  LLISTA D'EQUIPS   ");
+                                        System.out.println("====================");
+                                        for (int i = 0; i < players.size(); i++) {
+                                            System.out.println(teams.get(i).toString());
+                                        }
+                                        System.out.println("====================");
+                                        addP_to_T_2 = Leer.leerTexto("A quin equip vols assignar-lo? ");
+                                        
+                                        //En cas de que el jugador o l'equip no siguem correctes
+                                        /*while( addP_to_T.equals(????) || addP_to_T_2.equals(????)){
+                                            teams.add(addP_to_T);
+                                        }*/ 
+                                    }else{
+                                        System.out.println("Ni hi ha cap jugador o equip");
+                                    }
                                     break;
+    
                                 case 5:
                                     break;
+                                    
                                 case 6:
                                     break;
+                                    
                                 default:
                                     System.out.println("Opció incorrecta");
                             }
@@ -164,6 +284,7 @@ public class JocDeRol {
         }
         
     }
+    
     public static void provaFase(){
         System.out.println("Human:");
         Human h = new Human("Carles", 20, 50, 200);
