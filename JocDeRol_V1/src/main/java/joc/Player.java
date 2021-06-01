@@ -22,7 +22,7 @@ public abstract class Player {
         this.life = life;
     }
     
-    //Getters
+    //Getters i setters
     public String getName() {
         return name;
     }
@@ -38,6 +38,23 @@ public abstract class Player {
     public int getLife() {
         return life;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAttackP(int attackP) {
+        this.attackP = attackP;
+    }
+
+    public void setDefenseP(int defenseP) {
+        this.defenseP = defenseP;
+    }
+
+    public void setLife(int life) {
+        this.life = life;
+    }
+    
     
     //Mètodes 
     public void attack(Player p){

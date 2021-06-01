@@ -12,9 +12,10 @@ public class Alien extends Player {
     
     @Override
     public int getAttackP(){
-        if (this.getLife() < 20) {
-            this.attackP= this.attackP + 3;
+        if (this.getLife() > 20) {
+            this.setAttackP(this.getAttackP() + 3);
+            this.setDefenseP(this.getDefenseP() - 3);
         }
-        return this.attackP;
+        return this.getAttackP();
     }
 }
