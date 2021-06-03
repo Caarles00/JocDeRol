@@ -14,6 +14,18 @@ public class Item {
         this.defenseBonus = defenseBonus;
     }
 
+    public String getNomItem() {
+        return nomItem;
+    }
+
+    public int getAttcakBonus() {
+        return attcakBonus;
+    }
+
+    public int getDefenseBonus() {
+        return defenseBonus;
+    }
+
     @Override
     public String toString() {
         return this.nomItem + " BA: " + this.attcakBonus + " / " + " BD: " + this.defenseBonus;

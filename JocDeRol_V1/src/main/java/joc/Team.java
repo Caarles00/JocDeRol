@@ -7,11 +7,18 @@ public class Team{
     
     //Atributs
     private String teamName;
-    private ArrayList players = new ArrayList();
-    
+    private ArrayList<Player> players = new ArrayList();
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public ArrayList getPlayers() {
+        return players;
+    } 
     
     //Constructor
-    public Team(String teamName, String name, int attackP, int defenseP, int life) {
+    public Team(String teamName) {
         this.teamName = teamName;
     }
     
