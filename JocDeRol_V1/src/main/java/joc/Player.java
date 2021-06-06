@@ -10,7 +10,7 @@ public abstract class Player {
     private String name;
     private int attackP;
     private int defenseP;
-    private int life;
+    private int life, cont = 0;
     private ArrayList teams = new ArrayList();
     private ArrayList items = new ArrayList();
     
@@ -59,9 +59,9 @@ public abstract class Player {
     //Mètodes 
     public void attack(Player p){
         System.out.println("ABANS DE L'ATAC");
-        System.out.println("Atacant: " + this.getName() + " PA: " + getName() + "PA:" + this.attackP + " / PD:" + this.defenseP + " / PV:" + this.getLife());
+        System.out.println("Atacant: " + this.toString());
         System.out.println("Atacat: " + p.toString());
-        
+        hit(attackP, p);
     }
     
     protected void hit(int attackPoints, Player p){
@@ -118,6 +118,16 @@ public abstract class Player {
         System.out.println("");
     }
     
+    public static void contarEquips(Player p, ArrayList<Team>teams){
+        for (int i = 0; i < teams.size(); i++) {
+            for (int j = 0; j < teams.get(i).getPlayers().size(); j++) {
+//                if (p.getName().equalsIgnoreCase(teams.get(i).getPlayers())) {
+//                    
+//                }
+            }
+        }
+    }
+    
     //Team
     public void add(Team t){
         teams.add(t);
@@ -134,26 +144,31 @@ public abstract class Player {
     }
     
     public boolean equals(Player p){
-        return true;
+        if (this.equals(p)) {
+            return true;
+        } else {
+
+        }
+        return false;
     }
     
     //Item
     public void add(Item i){
-        items.add(i);//Afegim l'item
-        attackP = attackP + i.attcakBonus;//Sumem els punts d'atac que ens dona l'item
-        defenseP = defenseP + i.defenseBonus;//Sumem els punts de defensa que ens dona l'item
+        this.items.add(i);//Afegim l'item
+        this.attackP = this.attackP + i.attcakBonus;//Sumem els punts d'atac que ens dona l'item
+        this.defenseP = this.defenseP + i.defenseBonus;//Sumem els punts de defensa que ens dona l'item
     }
     
     public void remove(Item i){
-        items.remove(i);//Borrem l'item
-        attackP = attackP - i.attcakBonus;//Restem els punts d'atac que estaven afegits
-        defenseP = attackP - i.defenseBonus;//Restem els punts de defensa que estaven afegits
+        this.items.remove(i);//Borrem l'item
+        this.attackP = this.attackP - i.attcakBonus;//Restem els punts d'atac que estaven afegits
+        this.defenseP = this.attackP - i.defenseBonus;//Restem els punts de defensa que estaven afegits
         
     }
 
     @Override
     public String toString() {
-        return getName() + "PA:" + this.attackP + " / PD:" + this.defenseP + " / PV:" + this.life + " i te de items " + this.items;
+        return getName() + " PA:" + this.attackP + " / PD:" + this.defenseP + " / PV:" + this.life + " i te de items " + this.items;
     }
     
     

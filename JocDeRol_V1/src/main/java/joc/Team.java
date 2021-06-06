@@ -14,12 +14,13 @@ public class Team{
     }
 
     public ArrayList getPlayers() {
-        return players;
+        return this.players;
     } 
     
     //Constructor
     public Team(String teamName) {
         this.teamName = teamName;
+        this.players = new ArrayList<>();
     }
     
     //Mètodes
@@ -45,7 +46,7 @@ public class Team{
 
     @Override
     public String toString() {
-        return "Equip: " + this.teamName;
+        return "Equip: " + this.teamName + this.getPlayers();
     }
     
     
