@@ -1,8 +1,10 @@
 
 package joc;
 
+import java.io.Serializable;
 
-public class Item {
+
+public class Item implements Serializable{
     String nomItem;
     int attcakBonus;
     int defenseBonus;

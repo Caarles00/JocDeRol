@@ -3,7 +3,6 @@ package inici;
 
 import io.Leer;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.io.*;
 import joc.Alien;
 import joc.Human;
@@ -17,9 +16,9 @@ import joc.Warrior;
 public class JocDeRol {
     
     //Fitxers
-    File p = new File("players.dot");
-    File t = new File("teams.dat");
-    File i = new File("item.dat");
+    static File p = new File("players.dot");
+    static File t = new File("teams.dat");
+    static File i = new File("item.dat");
     
     public static void main(String[] args) {
         
@@ -30,7 +29,6 @@ public class JocDeRol {
         Team equipAliat_T = null;
         Team equipEnemic_T = null;
         
-        Scanner teclat = new Scanner(System.in);
         int op1, op2, op3, op4, op5, opTipusJug, puntsAtac, puntsDef, puntsVida, pDefensa, pAtac, cont = 0, numA2, numAene, numAene2;
         boolean seguir = true;
         String nom, deletePlayer, addP_to_T, addP_to_T_2, assignarItem, assignarItem_P, nomEquip, borrarEquip, nomItem, borrarItem;
@@ -171,7 +169,7 @@ public class JocDeRol {
                                         System.out.println(" LLISTA DE JUGADORS ");
                                         System.out.println("====================");
                                         for (int i = 0; i < players.size(); i++) {
-                                            System.out.println(players.get(i).getName());
+                                            System.out.println(players.get(i).toString());
                                         }
                                         System.out.println("====================");
                                         deletePlayer = Leer.leerTexto("Quin jugador vols borrar? ");
@@ -505,9 +503,9 @@ public class JocDeRol {
                     
                     if (!players.isEmpty() && players.size() > 1) {
                        //Fitxers
-                        fitxersPlayers(players);
-                        fitxersTeams(teams);
-                        fitxersItem(items);
+//                        fitxersPlayers(players);
+//                        fitxersTeams(teams);
+//                        fitxersItem(items);
                         
                         for (int i = 0; i < jugadorEqAli.size(); i++) {
                             if (jugadorEqAli.get(i).getLife() == 0) {
@@ -647,19 +645,17 @@ public class JocDeRol {
         
     }
     
-    public static void fitxersPlayers( ArrayList<Player> players){
-        FileWriter fw = null;
-        BufferedWriter bw = null;
+    public static void escriureFitxersPlayers( ArrayList<Player> players) throws FileNotFoundException, IOException{
+        FileOutputStream fos = new FileOutputStream(p);
+        ObjectOutputStream pObj = new ObjectOutputStream(fos);
         
         try{
-            for (int i = 0; i < players.size(); i++) {
-                bw.write(players.get(i).getName());
-                bw.newLine();
+            for (int j = 0; j < players.size(); j++) {
+                pObj.writeObject(players.get(j));
             }
-            bw.close();
-            fw.close();
+            pObj.close();
         }catch(IOException ex){
-            ex.printStackTrace();
+            
         }
     }
     
@@ -668,6 +664,8 @@ public class JocDeRol {
         BufferedWriter bw = null;
         
         try{
+            bw.write("EQUIPS:");
+            bw.newLine();
             for (int i = 0; i < teams.size(); i++) {
                 bw.write(teams.get(i).getTeamName());
                 bw.newLine();
@@ -684,6 +682,8 @@ public class JocDeRol {
         BufferedWriter bw = null;
         
         try{
+            bw.write("ITEMS:");
+            bw.newLine();
             for (int i = 0; i < items.size(); i++) {
                 bw.write(items.get(i).getNomItem());
                 bw.newLine();
@@ -695,23 +695,23 @@ public class JocDeRol {
         }
     }
     
-    public static void provaFase(){
-        System.out.println("Human:");
-        Human h = new Human("Carles", 20, 50, 200);
-        
-        
-        
-        System.out.println("Warrior:");
-        Warrior w = new Warrior("Odin", 30, 40, 150);
-        
-        System.out.println("Alien:");
-        Alien a = new Alien("Ete", 60, 20, 100);
-        
-        Team t = new Team("pacos");
-        Team t1 = new Team("billys");
-        
-        t.add(h);
-        t1.add(a);
-   }
+//    public static void provaFase(){
+//        System.out.println("Human:");
+//        Human h = new Human("Carles", 20, 50, 200);
+//        
+//        
+//        
+//        System.out.println("Warrior:");
+//        Warrior w = new Warrior("Odin", 30, 40, 150);
+//        
+//        System.out.println("Alien:");
+//        Alien a = new Alien("Ete", 60, 20, 100);
+//        
+//        Team t = new Team("pacos");
+//        Team t1 = new Team("billys");
+//        
+//        t.add(h);
+//        t1.add(a);
+//   }
     
 }

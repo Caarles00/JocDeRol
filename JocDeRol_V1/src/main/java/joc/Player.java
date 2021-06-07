@@ -1,10 +1,11 @@
 
 package joc;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public abstract class Player {
+public abstract class Player implements Serializable{
     
     //Atributs 
     private String name;
@@ -53,6 +54,14 @@ public abstract class Player {
 
     public void setLife(int life) {
         this.life = life;
+    }
+
+    public ArrayList getTeams() {
+        return teams;
+    }
+
+    public void setTeams(ArrayList teams) {
+        this.teams = teams;
     }
     
     
@@ -118,16 +127,6 @@ public abstract class Player {
         System.out.println("");
     }
     
-    public static void contarEquips(Player p, ArrayList<Team>teams){
-        for (int i = 0; i < teams.size(); i++) {
-            for (int j = 0; j < teams.get(i).getPlayers().size(); j++) {
-//                if (p.getName().equalsIgnoreCase(teams.get(i).getPlayers())) {
-//                    
-//                }
-            }
-        }
-    }
-    
     //Team
     public void add(Team t){
         teams.add(t);
@@ -168,7 +167,7 @@ public abstract class Player {
 
     @Override
     public String toString() {
-        return getName() + " PA:" + this.attackP + " / PD:" + this.defenseP + " / PV:" + this.life + " i te de items " + this.items;
+        return getName() + " PA:" + this.attackP + " / PD:" + this.defenseP + " / PV:" + this.life + "pertany a " + this.getTeams().size() + " i te d'items " + this.items;
     }
     
     
