@@ -11,7 +11,7 @@ public abstract class Player implements Serializable{
     private String name;
     private int attackP;
     private int defenseP;
-    private int life, cont = 0;
+    private int life;
     private ArrayList teams = new ArrayList();
     private ArrayList items = new ArrayList();
     

@@ -20,7 +20,7 @@ public class JocDeRol {
     static File t = new File("teams.dat");
     static File i = new File("item.dat");
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException {
         
         //Arrays per a guardar els jugadors, grups i per a les armes
         ArrayList<Player> players = new ArrayList();
@@ -66,6 +66,8 @@ public class JocDeRol {
                             System.out.println("1.1.3 Esborrar jugadors         ");
                             System.out.println("1.1.4 Assignar jugardor a equip ");
                             System.out.println("1.1.5 Assignar objecte a jugador");
+                            System.out.println("1.1.6 Exportar jugadors         ");
+                            System.out.println("1.1.7 Imporat jugadors          ");
                             System.out.println("1.1.6 Eixir                     ");
                             System.out.println("================================");
                             op3 = Leer.leerEntero("Tria una opció: ");
@@ -267,6 +269,14 @@ public class JocDeRol {
                                     break;
                                     
                                 case 6:
+                                    escriureFitxersPlayers(players);
+                                    break;
+                                
+                                case 7:
+                                    llegirFitxerPlayers(players);
+                                    break;
+                                    
+                                case 8:
                                     System.out.println("Has triat eixir");
                                     break;
                                     
@@ -283,7 +293,9 @@ public class JocDeRol {
                             System.out.println("1.2.2 Mostrar equips          ");
                             System.out.println("1.2.3 Esborrar equip          ");
                             System.out.println("1.2.4 Assignar equip a jugador");
-                            System.out.println("1.2.5 Eixir                   ");
+                            System.out.println("1.2.5 Exportar equips         ");
+                            System.out.println("1.2.6 Importar equips");
+                            System.out.println("1.2.7 Eixir                   ");
                             System.out.println("==============================");
                             op4 = Leer.leerEntero("Tria una opció: ");
                             switch(op4){
@@ -373,6 +385,12 @@ public class JocDeRol {
                                     }
                                     break;
                                 case 5:
+                                    escriureFitxersTeams(teams);
+                                    break;
+                                case 6:
+                                    llegirFitxerItems(items);
+                                    break;
+                                case 7:
                                     System.out.println("Has triat eixir");
                                     break;
                                 default:
@@ -387,7 +405,9 @@ public class JocDeRol {
                             System.out.println("1.3.2 Mostrar objectes           ");
                             System.out.println("1.3.3 Esborrar objecte           ");
                             System.out.println("1.3.4 Assignar objecete a jugador");
-                            System.out.println("1.3.5 Eixir                      ");
+                            System.out.println("1.2.5 Escriure items             ");
+                            System.out.println("1.2.6 Llegir items               ");
+                            System.out.println("1.3.7 Eixir                      ");
                             System.out.println("=================================");
                             op5 = Leer.leerEntero("Tria una opció: ");
                             switch(op5){
@@ -478,6 +498,12 @@ public class JocDeRol {
                                     }
                                     break;
                                 case 5:
+                                    escriureFitxersItem(items);
+                                    break;
+                                case 6:
+                                    llegirFitxerItems(items);
+                                    break;
+                                case 7:
                                     System.out.println("Has triat eixir");
                                     break;
                                 default:
@@ -502,10 +528,6 @@ public class JocDeRol {
                     System.out.println("ES HORA DE JUGAR!!");
                     
                     if (!players.isEmpty() && players.size() > 1) {
-                       //Fitxers
-//                        fitxersPlayers(players);
-//                        fitxersTeams(teams);
-//                        fitxersItem(items);
                         
                         for (int i = 0; i < jugadorEqAli.size(); i++) {
                             if (jugadorEqAli.get(i).getLife() == 0) {
@@ -645,62 +667,109 @@ public class JocDeRol {
         
     }
     
+    //FITXERS
     public static void escriureFitxersPlayers( ArrayList<Player> players) throws FileNotFoundException, IOException{
         FileOutputStream fos = new FileOutputStream(p);
         ObjectOutputStream pObj = new ObjectOutputStream(fos);
         
         try{
+            //Cada element de l'ArrayList s'escriu en el fitxer
             for (int j = 0; j < players.size(); j++) {
                 pObj.writeObject(players.get(j));
             }
             pObj.close();
         }catch(IOException ex){
+            ex.printStackTrace();
+        }
+    }
+    
+    public static void llegirFitxerPlayers(ArrayList<Player> players) throws FileNotFoundException, IOException, ClassNotFoundException{
+        FileInputStream fis = new FileInputStream(p);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        
+        try{
+            while(fis.available() > 0){
+                players = (ArrayList<Player>) ois.readObject();
+            }
+            ois.close();
             
-        }
-    }
-    
-    public static void fitxersTeams(ArrayList<Team>teams){
-        FileWriter fw = null;
-        BufferedWriter bw = null;
-        
-        try{
-            bw.write("EQUIPS:");
-            bw.newLine();
-            for (int i = 0; i < teams.size(); i++) {
-                bw.write(teams.get(i).getTeamName());
-                bw.newLine();
-            }
-            bw.close();
-            fw.close();
+        }catch(ClassNotFoundException ex){
+            ex.printStackTrace();
         }catch(IOException ex){
             ex.printStackTrace();
         }
     }
     
-    public static void fitxersItem( ArrayList<Item> items ){
-        FileWriter fw = null;
-        BufferedWriter bw = null;
+    public static void escriureFitxersTeams(ArrayList<Team>teams) throws FileNotFoundException, IOException{
+        FileOutputStream fos = new FileOutputStream(t);
+        ObjectOutputStream tObj = new ObjectOutputStream(fos);
         
         try{
-            bw.write("ITEMS:");
-            bw.newLine();
-            for (int i = 0; i < items.size(); i++) {
-                bw.write(items.get(i).getNomItem());
-                bw.newLine();
+            //Cada element de l'ArrayList s'escriu en el fitxer
+            for (int j = 0; j < teams.size(); j++) {
+                tObj.writeObject(teams.get(j));
             }
-            bw.close();
-            fw.close();
+            tObj.close();
         }catch(IOException ex){
             ex.printStackTrace();
         }
     }
+    
+    public static void llegirFitxerTeams(ArrayList<Team> teams) throws FileNotFoundException, IOException, ClassNotFoundException{
+        FileInputStream fis = new FileInputStream(p);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        
+        try{
+            while(fis.available() > 0){
+                teams = (ArrayList<Team>) ois.readObject();
+            }
+            ois.close();
+            
+        }catch(ClassNotFoundException ex){
+            ex.printStackTrace();
+        }catch(IOException ex){
+            ex.printStackTrace();
+        }
+    }
+    
+    public static void escriureFitxersItem( ArrayList<Item> items ) throws FileNotFoundException, IOException{
+        FileOutputStream fos = new FileOutputStream(i);
+        ObjectOutputStream iObj = new ObjectOutputStream(fos);
+        
+        try{
+            //Cada element de l'ArrayList s'escriu en el fitxer
+            for (int j = 0; j < items.size(); j++) {
+                iObj.writeObject(items.get(j));
+            }
+            iObj.close();
+            
+        }catch(IOException ex){
+            ex.printStackTrace();
+        }
+    }
+    
+    public static void llegirFitxerItems(ArrayList<Item> items) throws FileNotFoundException, IOException, ClassNotFoundException{
+        FileInputStream fis = new FileInputStream(p);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        
+        try{
+            while(fis.available() > 0){
+                items = (ArrayList<Item>) ois.readObject();
+            }
+            ois.close();
+            
+        }catch(ClassNotFoundException ex){
+            ex.printStackTrace();
+        }catch(IOException ex){
+            ex.printStackTrace();
+        }
+    }
+}
     
 //    public static void provaFase(){
 //        System.out.println("Human:");
 //        Human h = new Human("Carles", 20, 50, 200);
-//        
-//        
-//        
+//  
 //        System.out.println("Warrior:");
 //        Warrior w = new Warrior("Odin", 30, 40, 150);
 //        
@@ -712,6 +781,7 @@ public class JocDeRol {
 //        
 //        t.add(h);
 //        t1.add(a);
+//        
+//        h.attack(w);
 //   }
-    
-}
+//}
